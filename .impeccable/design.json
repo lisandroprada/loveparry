@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-24T00:00:00Z",
+  "title": "Design System: Duplex Love Parry",
+  "extensions": {
+    "colorMeta": {
+      "azul": { "role": "primary", "displayName": "Azul Enlozado", "canonical": "#2e3092", "tonalRamp": ["#0e0f3a", "#16185e", "#22246f", "#2e3092", "#5558b8", "#7f82cf", "#aeb0e3", "#dcddf4"] },
+      "azul-hondo": { "role": "primary", "displayName": "Azul Hondo", "canonical": "#22246f", "tonalRamp": ["#0b0c2c", "#12134a", "#1a1b5a", "#22246f", "#3b3d8f", "#6a6cb0", "#a3a5d6", "#d8d9ee"] },
+      "celeste": { "role": "secondary", "displayName": "Celeste de Marca", "canonical": "#27aae1", "tonalRamp": ["#0a3a50", "#0f5576", "#157aa8", "#27aae1", "#5bbfe9", "#8ed2f0", "#bde5f7", "#e3f4fb"] },
+      "pared": { "role": "neutral", "displayName": "Pared", "canonical": "#eef1f8", "tonalRamp": ["#1d2059", "#4a4f86", "#7a7fb0", "#a9aed0", "#c5cbe6", "#e2e7f4", "#eef1f8", "#ffffff"] },
+      "tinta": { "role": "neutral", "displayName": "Tinta", "canonical": "#1d2059", "tonalRamp": ["#0f1136", "#1d2059", "#2f3375", "#4a4f86", "#6f74a3", "#9399c0", "#c5cbe6", "#e2e7f4"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Letra de chapa", "purpose": "Número de calle del hero, Montserrat 900 en mayúsculas." },
+      "headline": { "displayName": "Titular de cierre", "purpose": "Llamado final sobre bloque azul." },
+      "title": { "displayName": "Título de chapa", "purpose": "h2 dentro de cada chapa-título." },
+      "body": { "displayName": "Cuerpo Light", "purpose": "Texto corrido, peso 300." },
+      "label": { "displayName": "Rótulo", "purpose": "Rótulos mayúsculos con tracking dentro de una chapa." }
+    },
+    "shadows": [
+      { "name": "borde-de-chapa", "value": "inset 0 0 0 3px #22246f, inset 0 0 0 4px rgba(255,255,255,0.28)", "purpose": "Doble anillo interior que resuelve el borde enrollado." },
+      { "name": "asiento-de-chapa", "value": "0 14px 26px -12px rgba(34,36,111,0.55), 0 2px 0 #22246f", "purpose": "Apoya la chapa sobre la pared." },
+      { "name": "asiento-de-boton", "value": "0 10px 20px -10px rgba(34,36,111,0.7), 0 2px 0 #22246f", "purpose": "Botón primario." },
+      { "name": "asiento-de-foto", "value": "0 16px 30px -18px rgba(34,36,111,0.5)", "purpose": "Fotos con marco blanco." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Exponencial de salida para todo." },
+      { "name": "atornillar", "value": "opacity 0.6s, transform 0.7s; desde translateY(14px) scale(0.985)", "purpose": "La chapa entra una sola vez; apagado con prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "escritorio", "value": "48rem" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Chapa de título",
+      "kind": "custom",
+      "refersTo": "plate",
+      "description": "Chapa azul con filete blanco y remaches que lleva cada h2.",
+      "html": "<div class=\"ds-plate\"><h2>Lo que tiene</h2></div>",
+      "css": ".ds-plate { position: relative; display: inline-block; isolation: isolate; background: #2e3092; color: #fff; border-radius: 10px; padding: 0.875rem 1.75rem 0.75rem; font-family: Montserrat, system-ui, sans-serif; box-shadow: inset 0 0 0 3px #22246f, inset 0 0 0 4px rgba(255,255,255,0.28), 0 14px 26px -12px rgba(34,36,111,0.55), 0 2px 0 #22246f; } .ds-plate::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: radial-gradient(circle, #c9cff0 0 48%, rgba(0,0,0,.25) 52% 62%, transparent 66%) left 4px top 4px / 5px 5px no-repeat, radial-gradient(circle, #c9cff0 0 48%, rgba(0,0,0,.25) 52% 62%, transparent 66%) right 4px top 4px / 5px 5px no-repeat, radial-gradient(circle, #c9cff0 0 48%, rgba(0,0,0,.25) 52% 62%, transparent 66%) left 4px bottom 4px / 5px 5px no-repeat, radial-gradient(circle, #c9cff0 0 48%, rgba(0,0,0,.25) 52% 62%, transparent 66%) right 4px bottom 4px / 5px 5px no-repeat; } .ds-plate::after { content: ''; position: absolute; inset: 8px; z-index: -1; border: 2px solid rgba(255,255,255,.92); border-radius: 7px; } .ds-plate h2 { margin: 0; font-weight: 900; font-size: 1.5rem; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.04em; }"
+    },
+    {
+      "name": "Botón primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Llamado a WhatsApp, azul con asiento de sombra.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Escribinos por WhatsApp</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 3.5rem; padding: 0.75rem 1.5rem; background: #2e3092; color: #fff; font: 800 1rem/1.2 Montserrat, system-ui, sans-serif; letter-spacing: 0.02em; text-decoration: none; border-radius: 12px; box-shadow: 0 10px 20px -10px rgba(34,36,111,.7), 0 2px 0 #22246f; transition: transform .25s cubic-bezier(.16,1,.3,1), background-color .25s cubic-bezier(.16,1,.3,1); } .ds-btn:hover { background: #22246f; transform: translateY(-2px); } .ds-btn:active { transform: translateY(1px) scale(.985); } .ds-btn:focus-visible { outline: 3px solid #2e3092; outline-offset: 3px; }"
+    },
+    {
+      "name": "Botón claro",
+      "kind": "button",
+      "refersTo": "button-claro",
+      "description": "Variante blanca para el bloque azul de cierre.",
+      "html": "<a class=\"ds-btn-claro\" href=\"#\">Escribinos por WhatsApp</a>",
+      "css": ".ds-btn-claro { display: inline-flex; align-items: center; justify-content: center; min-height: 3.5rem; padding: 0.75rem 1.5rem; background: #fff; color: #2e3092; font: 800 1rem/1.2 Montserrat, system-ui, sans-serif; text-decoration: none; border-radius: 12px; box-shadow: 0 10px 20px -10px rgba(0,0,0,.5), 0 2px 0 #c9cff0; } .ds-btn-claro:hover { background: #eef1f8; } .ds-btn-claro:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }"
+    },
+    {
+      "name": "Pregunta",
+      "kind": "card",
+      "refersTo": "faq-item",
+      "description": "Tarjeta de pregunta frecuente con details nativo.",
+      "html": "<details class=\"ds-faq\"><summary>¿Se puede visitar?</summary><p>Consultanos por WhatsApp.</p></details>",
+      "css": ".ds-faq { background: #fff; border: 1px solid #c5cbe6; border-radius: 12px; font-family: Montserrat, system-ui, sans-serif; color: #1d2059; } .ds-faq summary { cursor: pointer; min-height: 3.5rem; display: flex; align-items: center; padding: 1rem 1.25rem; font-weight: 800; font-size: 1rem; } .ds-faq summary:focus-visible { outline: 3px solid #2e3092; outline-offset: 3px; } .ds-faq p { margin: 0; padding: 0 1.25rem 1.25rem; font-weight: 300; }"
+    },
+    {
+      "name": "Foto con epígrafe",
+      "kind": "custom",
+      "refersTo": "plate",
+      "description": "Foto con marco blanco y epígrafe en chapa chica sobre el borde.",
+      "html": "<figure class=\"ds-foto\"><div class=\"ds-img\"></div><figcaption>Living</figcaption></figure>",
+      "css": ".ds-foto { position: relative; margin: 0; width: 220px; } .ds-img { height: 140px; background: #e2e7f4; border: 6px solid #fff; border-radius: 12px; outline: 1px solid #c5cbe6; box-shadow: 0 16px 30px -18px rgba(34,36,111,.5); } .ds-foto figcaption { position: absolute; left: .75rem; bottom: -.875rem; padding: .5rem 1rem; background: #2e3092; color: #fff; border-radius: 8px; font: 800 .75rem Montserrat, system-ui, sans-serif; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 8px 14px -8px rgba(34,36,111,.7); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La Chapa de Calle",
+    "overview": "La página es la chapa de numeración de la calle: un campo azul enlozado, letras blancas, un filete blanco interior y remaches en las esquinas, montado sobre una pared celeste muy pálida. Rechaza la plantilla de portal inmobiliario. Densidad baja, celular primero; las fotos son llanas y honestas sobre blanco con marco fino. La marca Propietas manda.",
+    "keyCharacteristics": [
+      "Una sola familia, Montserrat: Black en mayúsculas para chapas, Light para cuerpo.",
+      "Chapa como único contenedor distintivo; el resto es pared y blanco.",
+      "Neutros tintados hacia el azul de marca, sin grises puros.",
+      "Movimiento único: la chapa se atornilla al entrar.",
+      "El borde enrollado se resuelve como doble anillo interior; los remaches son radial-gradient."
+    ],
+    "rules": [
+      { "name": "The Enamel Rule", "body": "El azul pleno es superficie de chapa, nunca texto corrido sobre pared. En texto sobre pared se usa Tinta.", "section": "colors" },
+      { "name": "The Tinted Neutral Rule", "body": "Ningún gris ni blanco puro de fondo: pared, trazo y tinta salen del matiz del azul de marca.", "section": "colors" },
+      { "name": "The Plate Letter Rule", "body": "Mayúsculas y peso 900 solo sobre campo azul o en el cierre azul; el cuerpo nunca va en mayúsculas.", "section": "typography" },
+      { "name": "The Tinted Shadow Rule", "body": "Toda sombra sale del azul hondo, no del negro.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do hacer de cada título, el precio, la ficha y cada epígrafe una chapa con filete y remaches.",
+      "Do poner las fotos sobre blanco con borde de 6px y contorno fino en Trazo.",
+      "Do tintar neutros y sombras hacia el azul (#22246f para sombras).",
+      "Do animar la chapa una sola vez al entrar y apagarlo con prefers-reduced-motion.",
+      "Do mantener objetivos táctiles de al menos 3rem y foco visible."
+    ],
+    "donts": [
+      "Don't armar la plantilla de portal (galería izquierda, caja de precio derecha, formulario).",
+      "Don't anidar chapas ni poner texto corrido dentro de ellas.",
+      "Don't usar celeste en texto chico sobre blanco.",
+      "Don't aplicar efectos al logo ni deformarlo (regla del manual de marca).",
+      "Don't usar mayúsculas con peso 900 fuera de campos azules."
+    ]
+  }
+}
