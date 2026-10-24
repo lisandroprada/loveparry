@@ -243,14 +243,78 @@ h1, h2, h3, p, figure { margin: 0; }
 .barra.visible { transform: none; }
 .barra .btn { min-height: 3rem; }
 
-/* ---------- Movimiento: la chapa se atornilla una vez ---------- */
-.js [data-reveal] { opacity: 0; transform: translateY(14px) scale(0.985); }
-.js [data-reveal].in { opacity: 1; transform: none; transition: opacity 0.6s var(--ease), transform 0.7s var(--ease); }
+/* ---------- Movimiento: la chapa se cuelga, se atornilla y se llena ---------- */
+.js [data-reveal] { opacity: 0; transform: translateY(14px); }
+.js [data-reveal].in {
+  opacity: 1; transform: none;
+  transition: opacity 0.6s var(--ease) var(--d, 0s), transform 0.8s var(--ease) var(--d, 0s);
+}
+.js [data-reveal].done { transition: none; }
+
+/* Placas: cuelgan desde arriba, los remaches se asientan, el filete se dibuja */
+.js .plate[data-reveal] { transform: translateY(-18px) scale(0.98); transform-origin: 50% 0; }
+.js .plate[data-reveal]::before { opacity: 0; transform: scale(1.35); }
+.js .plate[data-reveal]::after { clip-path: inset(0 100% 0 0); }
+.js .plate[data-reveal].in::before {
+  opacity: 1; transform: none;
+  transition: opacity 0.4s var(--ease) calc(var(--d, 0s) + 0.5s), transform 0.7s var(--ease) calc(var(--d, 0s) + 0.5s);
+}
+.js .plate[data-reveal].in::after { clip-path: inset(0 0 0 0); transition: clip-path 1s var(--ease) calc(var(--d, 0s) + 0.25s); }
+.js .plate[data-reveal].done::before, .js .plate[data-reveal].done::after { transition: none; }
+
+/* Letras del hero */
+.js .plate--xl[data-reveal].in h1 > span { animation: sube 0.9s var(--ease) both; animation-delay: calc(var(--d, 0s) + 0.35s); }
+.js .plate--xl[data-reveal].in h1 > .num { animation-delay: calc(var(--d, 0s) + 0.5s); }
+.js .plate--xl[data-reveal].in .ciudad { animation: sube 0.9s var(--ease) both; animation-delay: calc(var(--d, 0s) + 0.7s); }
+.js .plate--xl[data-reveal] h1 > span, .js .plate--xl[data-reveal] .ciudad { opacity: 0; }
+@keyframes sube { from { opacity: 0; transform: translateY(0.35em); } to { opacity: 1; transform: none; } }
+
+/* Ficha: las filas entran una tras otra */
+.js .plate--ficha[data-reveal] .datos > div { opacity: 0; transform: translateX(-12px); }
+.js .plate--ficha[data-reveal].in .datos > div {
+  opacity: 1; transform: none;
+  transition: opacity 0.5s var(--ease) calc(var(--d, 0s) + 0.5s + var(--i, 0) * 90ms), transform 0.7s var(--ease) calc(var(--d, 0s) + 0.5s + var(--i, 0) * 90ms);
+}
+.js .plate--ficha[data-reveal].done .datos > div { transition: none; }
+.datos > div:nth-child(2) { --i: 1; } .datos > div:nth-child(3) { --i: 2; }
+.datos > div:nth-child(4) { --i: 3; } .datos > div:nth-child(5) { --i: 4; }
+
+/* Fotos: se revelan por recorte, con un asentamiento de escala, y la etiqueta se desliza */
+.js .foto[data-reveal], .js .hero__foto[data-reveal] { opacity: 1; transform: none; }
+.js .foto[data-reveal] img, .js .hero__foto[data-reveal] img { opacity: 0; clip-path: inset(14% 0 0 0 round 12px); transform: scale(1.06); }
+.js .foto[data-reveal].in img, .js .hero__foto[data-reveal].in img {
+  opacity: 1; clip-path: inset(0 round 12px); transform: none;
+  transition: opacity 0.5s var(--ease) var(--d, 0s), clip-path 1s var(--ease) var(--d, 0s), transform 1.3s var(--ease) var(--d, 0s);
+}
+.js .foto[data-reveal].done img, .js .hero__foto[data-reveal].done img { transition: none; clip-path: none; }
+.js .foto[data-reveal] figcaption { opacity: 0; transform: translateX(-16px); }
+.js .foto[data-reveal].in figcaption {
+  opacity: 1; transform: none;
+  transition: opacity 0.5s var(--ease) calc(var(--d, 0s) + 0.55s), transform 0.7s var(--ease) calc(var(--d, 0s) + 0.55s);
+}
+.js .foto[data-reveal].done figcaption { transition: none; }
+
+/* Botón: entra con el resto y da un aviso, una sola vez */
+.js .btn[data-reveal].done { transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background-color 0.25s var(--ease); }
+.js #cta-principal.done { animation: aviso 1.4s var(--ease) 1.2s 1 both; }
+@keyframes aviso {
+  0% { box-shadow: 0 0 0 0 rgba(46, 48, 146, 0.45), 0 10px 20px -10px rgba(34, 36, 111, 0.7), 0 2px 0 var(--azul-hondo); }
+  100% { box-shadow: 0 0 0 16px rgba(46, 48, 146, 0), 0 10px 20px -10px rgba(34, 36, 111, 0.7), 0 2px 0 var(--azul-hondo); }
+}
+
+@media (hover: hover) {
+  .foto { transition: translate 0.45s var(--ease); }
+  .foto:hover { translate: 0 -5px; }
+  .foto figcaption { transition: transform 0.45s var(--ease); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js [data-reveal], .js [data-reveal].in { opacity: 1; transform: none; transition: none; }
-  .btn, .barra, .preg summary::after { transition: none; }
+  .js [data-reveal], .js [data-reveal].in, .js [data-reveal] *, .js [data-reveal]::before, .js [data-reveal]::after {
+    opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; animation: none !important;
+  }
+  .btn, .barra, .preg summary::after, .foto, .foto figcaption { transition: none; }
+  .foto:hover { translate: none; }
 }
 
 /* ---------- Escritorio ---------- */

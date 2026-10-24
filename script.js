@@ -10,6 +10,8 @@
       entries.forEach((e) => {
         if (!e.isIntersecting) return;
         e.target.classList.add('in');
+        const d = parseFloat(getComputedStyle(e.target).getPropertyValue('--d')) || 0;
+        setTimeout(() => e.target.classList.add('done'), (d + 2.4) * 1000);
         io.unobserve(e.target);
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
